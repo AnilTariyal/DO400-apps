@@ -20,16 +20,17 @@ public class Library {
         this.inventory = inventory;
     }
 
-    public Book checkOut(String studentId, String isbn) throws BookNotAvailableException {
-        if (!inventory.isBookAvailable(isbn)) {
-            throw new BookNotAvailableException(isbn);
-        }
+	@Test
+	public void checkingOutDecreasesNumberOfBookCopiesFromInventory()
+	throws BookNotAvailableException {
+	// Given
+ inventory.add(new Book("book1"));
+ inventory.add(new Book("book1"));
+// // When
+ library.checkOut("someStudentId", "book1");
+// // Then
+ assertEquals(1, inventory.countCopies("book1"));
 
-        Book book = inventory.withdraw(isbn);
-        loans.markAsBorrowed(studentId, book);
-
-        return book;
-    }
 
     public double getAvailablityRate() {
         return 1 - ((double) loans.count() / inventory.count());

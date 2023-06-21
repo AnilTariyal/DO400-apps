@@ -11,4 +11,14 @@ public class BookStats {
 
         return book.text.split("\\s+").length;
     }
+	@Test
+	public void countingWordsReturnsNumberOfWordsInBook() {
+		// Given
+		 Book book = new Book("someISBN", "this is the content");
+		// // When
+		double wordCount = BookStats.countWords(book);
+		// // Then
+		assertEquals(4, wordCount);
+		}
+
 }
